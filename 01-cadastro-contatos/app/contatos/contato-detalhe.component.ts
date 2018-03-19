@@ -3,6 +3,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common'; 
 
 import {ContatoService} from './contato.service'
+import { Contato } from './contato.model';
 
 @Component({
     moduleId: module.id,
@@ -23,6 +24,11 @@ export class ContatoDetalheComponent implements OnInit {
             let id: number = +params['id'];//significa que queremos oegar do params a posição id
                                         //O +params é para ele converter o id em numero, pq ele vem como string
             console.log(id);
+
+        this.contatoService.getContato(id)
+            .then((contato: Contato) => {
+                console.log(contato);
+            })
         })
     }
 }

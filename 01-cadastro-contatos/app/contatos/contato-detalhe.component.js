@@ -26,6 +26,10 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             let id = +params['id']; //significa que queremos oegar do params a posição id
             //O +params é para ele converter o id em numero, pq ele vem como string
             console.log(id);
+            this.contatoService.getContato(id)
+                .then((contato) => {
+                console.log(contato);
+            });
         });
     }
 };
