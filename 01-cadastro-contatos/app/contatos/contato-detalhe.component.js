@@ -12,6 +12,7 @@ const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const common_1 = require("@angular/common");
 const contato_service_1 = require("./contato.service");
+const contato_model_1 = require("./contato.model");
 let ContatoDetalheComponent = class ContatoDetalheComponent {
     constructor(contatoService, route, //pegue a rota que estiver ativa, ex: contato/save
         location) {
@@ -20,15 +21,15 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
         this.location = location;
     }
     ngOnInit() {
-        console.log('on init');
+        this.contato = new contato_model_1.Contato(0, '', '', '');
         //params = vai retornar os parametros da nossa rota
         this.route.params.forEach((params) => {
-            let id = +params['id']; //significa que queremos oegar do params a posição id
+            let id = +params['id']; //significa que queremos pegar do params a posição id
             //O +params é para ele converter o id em numero, pq ele vem como string
             console.log(id);
             this.contatoService.getContato(id)
                 .then((contato) => {
-                console.log(contato);
+                this.contato = contato;
             });
         });
     }

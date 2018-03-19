@@ -11,6 +11,9 @@ import { Contato } from './contato.model';
     templateUrl: 'contato-detalhe.component.html'
 })
 export class ContatoDetalheComponent implements OnInit {
+    
+    contato: Contato;
+    
     constructor(
         private contatoService: ContatoService,
         private route: ActivatedRoute, //pegue a rota que estiver ativa, ex: contato/save
@@ -18,16 +21,16 @@ export class ContatoDetalheComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log('on init');
+        this.contato = new Contato(0, '', '', '');
         //params = vai retornar os parametros da nossa rota
         this.route.params.forEach((params: Params) => {
-            let id: number = +params['id'];//significa que queremos oegar do params a posição id
+            let id: number = +params['id'];//significa que queremos pegar do params a posição id
                                         //O +params é para ele converter o id em numero, pq ele vem como string
             console.log(id);
 
         this.contatoService.getContato(id)
             .then((contato: Contato) => {
-                console.log(contato);
+                this.contato = contato;
             })
         })
     }
