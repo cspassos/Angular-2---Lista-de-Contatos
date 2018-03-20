@@ -32,8 +32,23 @@ export class ContatoDetalheComponent implements OnInit {
                 this.contatoService.getContato(id)
                     .then((contato: Contato) => {
                         this.contato = contato;
-                    })
+                    });
             }
-        })
+        });
+    }
+
+    getFormGroupClass(isValid, isPristine) {
+        return {
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,//so vai ser retornado se o campo nao for valido e se ja for alterado
+            'has-success': isValid && !isPristine//vai ser retornado se o campo for valido e ja foi alterado
+        };
+    }
+    getFormControlClass(isValid, isPristine) {
+        return {
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
     }
 }
