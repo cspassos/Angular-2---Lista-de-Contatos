@@ -13,6 +13,7 @@ import { Contato } from './contato.model';
 export class ContatoDetalheComponent implements OnInit {
     
     contato: Contato;
+    private isNew: boolean = true;
     
     constructor(
         private contatoService: ContatoService,
@@ -29,6 +30,9 @@ export class ContatoDetalheComponent implements OnInit {
             console.log(id);
 
             if (id) {
+
+                this.isNew = false; //significa que nao estou cadastrando um novo contato e sim alterando.
+
                 this.contatoService.getContato(id)
                     .then((contato: Contato) => {
                         this.contato = contato;
@@ -50,5 +54,14 @@ export class ContatoDetalheComponent implements OnInit {
             'form-control-danger': !isValid && !isPristine,
             'form-control-success': isValid && !isPristine
         };
+    }
+
+    onSubmit(): void {
+        
+        if(this.isNew) {
+            console.log('cadastrar contato');
+        }else {
+            console.log('alterar contato');
+        }
     }
 }

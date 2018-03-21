@@ -19,6 +19,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
         this.contatoService = contatoService;
         this.route = route;
         this.location = location;
+        this.isNew = true;
     }
     ngOnInit() {
         this.contato = new contato_model_1.Contato(0, '', '', '');
@@ -28,6 +29,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             //O +params é para ele converter o id em numero, pq ele vem como string
             console.log(id);
             if (id) {
+                this.isNew = false; //significa que nao estou cadastrando um novo contato e sim alterando.
                 this.contatoService.getContato(id)
                     .then((contato) => {
                     this.contato = contato;
@@ -48,6 +50,14 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             'form-control-danger': !isValid && !isPristine,
             'form-control-success': isValid && !isPristine
         };
+    }
+    onSubmit() {
+        if (this.isNew) {
+            console.log('cadastrar contato');
+        }
+        else {
+            console.log('alterar contato');
+        }
     }
 };
 ContatoDetalheComponent = __decorate([
