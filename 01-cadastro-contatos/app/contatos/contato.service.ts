@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -10,6 +10,7 @@ import {CONTATOS} from './contatos-mock';
 export class ContatoService {
                                     //api =  projeto 
     private contatosUrl: string = 'api/contatos';// contato = é o retorno do metodo da classe in-memory-data.service.ts 
+    private headers: Headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
         private http: Http
@@ -27,6 +28,12 @@ export class ContatoService {
         return this.getContatos()
             .then((contatos: Contato[]) => contatos.find(contato => contato.id === id)); //percorre todo o array de contato
                 //quando o id for igual ao do array ele me retorna
+    }
+
+    create(contato: Contato): Promise<Contato> {
+        return this.http.post(this.contatosUrl, JSON.stringify(contato), {headers: this.headers})
+            .toPromise()
+            .then((response: Response) => response.json().data as Contato)
     }
 
     private handleError(err: any): Promise<Contato[]> {

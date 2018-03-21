@@ -16,6 +16,7 @@ let ContatoService = class ContatoService {
         this.http = http;
         //api =  projeto 
         this.contatosUrl = 'api/contatos'; // contato = é o retorno do metodo da classe in-memory-data.service.ts 
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     getContatos() {
         return this.http.get(this.contatosUrl)
@@ -27,6 +28,11 @@ let ContatoService = class ContatoService {
         return this.getContatos()
             .then((contatos) => contatos.find(contato => contato.id === id)); //percorre todo o array de contato
         //quando o id for igual ao do array ele me retorna
+    }
+    create(contato) {
+        return this.http.post(this.contatosUrl, JSON.stringify(contato), { headers: this.headers })
+            .toPromise()
+            .then((response) => response.json().data);
     }
     handleError(err) {
         return Promise.reject(err.message || err);
