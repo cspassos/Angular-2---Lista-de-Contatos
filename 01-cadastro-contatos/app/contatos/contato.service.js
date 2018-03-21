@@ -34,6 +34,12 @@ let ContatoService = class ContatoService {
             .toPromise()
             .then((response) => response.json().data);
     }
+    update(contato) {
+        const url = `${this.contatosUrl}/${contato.id}`; //app/contatos/:id
+        return this.http.put(url, JSON.stringify(contato), { headers: this.headers })
+            .toPromise()
+            .then(() => contato);
+    }
     handleError(err) {
         return Promise.reject(err.message || err);
     }
