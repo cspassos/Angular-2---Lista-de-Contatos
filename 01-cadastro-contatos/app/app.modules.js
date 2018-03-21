@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
 const common_1 = require("@angular/common");
+const http_1 = require("@angular/http");
+const angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+const in_memory_data_service_1 = require("./in-memory-data.service");
 const app_components_1 = require("./app.components");
 const app_routing_module_1 = require("./app-routing.module");
 const contatos_module_1 = require("./contatos/contatos.module");
@@ -18,7 +21,9 @@ AppModule = __decorate([
         imports: [
             app_routing_module_1.AppRoutingModule,
             platform_browser_1.BrowserModule,
-            contatos_module_1.ContatosModule
+            contatos_module_1.ContatosModule,
+            http_1.HttpModule,
+            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService)
         ],
         providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }],
         declarations: [app_components_1.AppComponent],
