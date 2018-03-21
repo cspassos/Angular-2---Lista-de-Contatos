@@ -1,12 +1,25 @@
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 import {Contato} from './contato.model';
 import {CONTATOS} from './contatos-mock';
 
 @Injectable()
 export class ContatoService {
+                                    //api =  projeto 
+    private contatosUrl: string = 'api/contatos';// contato = é o retorno do metodo da classe in-memory-data.service.ts 
+
+    constructor(
+        private http: Http
+    ){}
+
     getContatos(): Promise<Contato[]>{
-        return Promise.resolve(CONTATOS);
+        
+        return this.http.get(this.contatosUrl)
+            .toPromise()
+            .then(response => response.json().data as Contato[]);
     }
 
     getContato(id: number): Promise<Contato> {
