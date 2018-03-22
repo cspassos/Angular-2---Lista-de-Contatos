@@ -40,6 +40,13 @@ let ContatoService = class ContatoService {
             .toPromise()
             .then(() => contato);
     }
+    delete(contato) {
+        const url = `${this.contatosUrl}/${contato.id}`; //app/contatos/:id
+        return this.http
+            .delete(url, { headers: this.headers })
+            .toPromise()
+            .then(() => contato);
+    }
     handleError(err) {
         return Promise.reject(err.message || err);
     }

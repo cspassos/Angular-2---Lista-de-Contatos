@@ -14,6 +14,7 @@ const in_memory_data_service_1 = require("./in-memory-data.service");
 const app_components_1 = require("./app.components");
 const app_routing_module_1 = require("./app-routing.module");
 const contatos_module_1 = require("./contatos/contatos.module");
+const dialog_service_1 = require("./dialog.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,7 +26,10 @@ AppModule = __decorate([
             http_1.HttpModule,
             angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService)
         ],
-        providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        providers: [
+            { provide: common_1.APP_BASE_HREF, useValue: '/' },
+            dialog_service_1.DialogService
+        ],
         declarations: [app_components_1.AppComponent],
         bootstrap: [app_components_1.AppComponent]
     })

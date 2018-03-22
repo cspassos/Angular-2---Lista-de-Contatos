@@ -22,7 +22,8 @@
                         <td>{{c.nome}}</td>
                         <td>{{c.email}}</td>
                         <td>{{c.telefone}})</td>
-                        <td><button class="btn btn-danger">Deletar</button></td>
+                        <td><button class="btn btn-danger" (click)="onDelete(c); $event.stopPropagation()">Deletar</button></td>
+                        <!--stopPropagation = vai executar apenas o deletar, e nao o routerLink tambem.-->
                     </tr>
                 </tbody>
             </table>

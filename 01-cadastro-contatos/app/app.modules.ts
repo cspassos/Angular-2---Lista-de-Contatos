@@ -9,6 +9,7 @@ import {InMemoryDataService} from './in-memory-data.service';
 import { AppComponent } from './app.components';
 import {AppRoutingModule } from './app-routing.module';
 import { ContatosModule } from './contatos/contatos.module';
+import {DialogService} from './dialog.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,10 @@ import { ContatosModule } from './contatos/contatos.module';
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService)
     ],
-    providers: [{provide: APP_BASE_HREF, useValue : '/' }],
+    providers: [
+        {provide: APP_BASE_HREF, useValue : '/' },
+        DialogService
+    ],
     declarations: [AppComponent],
     bootstrap: [AppComponent]
 })
