@@ -66,6 +66,10 @@ export class ContatoDetalheComponent implements OnInit {
             console.log('alterar contato');
             promise = this.contatoService.update(this.contato);
         }
-        promise.then(contato => this.location.back());//location = voltar para a pagina anterior
+        promise.then(contato => this.goBack());//location = voltar para a pagina anterior
+    }
+
+    goBack(): void {
+        this.location.back();//location = voltar para a pagina anterior
     }
 }
