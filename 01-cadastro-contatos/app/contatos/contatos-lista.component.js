@@ -37,7 +37,7 @@ let ContatosListaComponent = class ContatosListaComponent {
                     this.contatos = this.contatos.filter((c) => c.id != contato.id);
                     this.mostrarMensagem({
                         tipo: 'success',
-                        texto: 'Contato deletado!'
+                        texto: 'Contato "' + contato.nome + '" deletado!'
                     });
                 }).catch(err => {
                     console.log(err);
@@ -53,7 +53,10 @@ let ContatosListaComponent = class ContatosListaComponent {
         this.mensagem = mensagem;
         this.montarClasses(mensagem.tipo);
         if (mensagem.tipo != 'danger') {
-            setTimeout(() => {
+            if (this.currentTimeout) {
+                clearTimeout(this.currentTimeout);
+            }
+            this.currentTimeout = setTimeout(() => {
                 this.mensagem = undefined;
             }, 3000);
         }
