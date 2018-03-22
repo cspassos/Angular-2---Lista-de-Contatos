@@ -12,6 +12,8 @@ import {DialogService} from '../dialog.service'
 export class ContatosListaComponent implements OnInit {
 
     contatos: Contato[];
+    mensagem: {};
+    classesCss: {};
 
     constructor(
         private contatoService: ContatoService,
@@ -22,7 +24,12 @@ export class ContatosListaComponent implements OnInit {
         this.contatoService.getContatos()
             .then((contatos: Contato[]) => {
                 this.contatos = contatos; 
-            }).catch(err => console.log(err));
+            }).catch(err => {
+                this.mostrarMensagem({
+                    tipo: 'danger',
+                    texto: 'Ocorreu um erro ao buscar a lista de contatos!'
+                });
+            });
     }
 
     onDelete(contato: Contato):void {
@@ -34,10 +41,37 @@ export class ContatosListaComponent implements OnInit {
                         .delete(contato)
                         .then(() => { //retornar todos os contatos menos o deletado
                             this.contatos = this.contatos.filter((c: Contato) => c.id != contato.id);
+
+                            this.mostrarMensagem({
+                                tipo: 'success',
+                                texto: 'Contato deletado!'
+                            });
                         }).catch(err => {
                             console.log(err)
+                            this.mostrarMensagem({
+                                tipo: 'danger',
+                                texto: 'Ocorreu um erro ao deletar contato!'
+                            });
                         })
                 }
             })
     }
+
+    private mostrarMensagem(mensagem: {tipo: string, texto: string}): void {
+        this.mensagem = mensagem;
+        this.montarClasses(mensagem.tipo);
+        if(mensagem.tipo != 'danger') {
+            setTimeout(() => {
+                this.mensagem = undefined;
+            }, 3000);
+        }
+    }
+
+    private montarClasses(tipo: string): void {
+        this.classesCss = {
+            'alert': true
+        };
+        this.classesCss['alert-' + tipo] = true; //alert-success ou alert-danger .....
+    }
+
 }
