@@ -12,6 +12,7 @@ const contatos_lista_component_1 = require("./contatos-lista.component");
 const contato_detalhe_component_1 = require("./contato-detalhe.component");
 const contato_routing_module_1 = require("./contato-routing.module");
 const contato_service_1 = require("./contato.service");
+const contato_busca_component_1 = require("./contato-busca.component");
 let ContatosModule = class ContatosModule {
 };
 ContatosModule = __decorate([
@@ -22,10 +23,12 @@ ContatosModule = __decorate([
             forms_1.FormsModule
         ],
         declarations: [
+            contato_busca_component_1.ContatoBuscaComponent,
             contatos_lista_component_1.ContatosListaComponent,
             contato_detalhe_component_1.ContatoDetalheComponent
         ],
         exports: [
+            contato_busca_component_1.ContatoBuscaComponent,
             contatos_lista_component_1.ContatosListaComponent
         ],
         providers: [

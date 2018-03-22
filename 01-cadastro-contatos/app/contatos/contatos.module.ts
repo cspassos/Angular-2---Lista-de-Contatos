@@ -6,6 +6,7 @@ import { ContatosListaComponent } from './contatos-lista.component';
 import { ContatoDetalheComponent } from './contato-detalhe.component';
 import {ContatoRoutingModule} from './contato-routing.module';
 import {ContatoService} from './contato.service';
+import {ContatoBuscaComponent} from './contato-busca.component';
 
 @NgModule({
     imports: [
@@ -14,10 +15,12 @@ import {ContatoService} from './contato.service';
         FormsModule
     ],
     declarations: [
+        ContatoBuscaComponent,
         ContatosListaComponent,
         ContatoDetalheComponent
     ],
     exports: [
+        ContatoBuscaComponent, // é preciso exportar para ele levar ele para o aap.component
         ContatosListaComponent
     ],
     providers: [
