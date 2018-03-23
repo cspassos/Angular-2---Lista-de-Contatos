@@ -55,6 +55,11 @@ let ContatoService = class ContatoService {
             setTimeout(resolve, 3000);
         }).then(() => this.getContatos());
     }
+    search2(term) {
+        return this.http //nome é o nome do atributo que temos no modelo Contato
+            .get(`${this.contatosUrl}/?nome=${term}`)
+            .map((res) => res.json().data); //informar que esse json é um array de contatos
+    }
 };
 ContatoService = __decorate([
     core_1.Injectable(),

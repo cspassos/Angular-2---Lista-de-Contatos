@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
 
 import {Contato} from './contato.model';
 import {CONTATOS} from './contatos-mock';
@@ -59,5 +60,11 @@ export class ContatoService {
         return new Promise((resolve, reject) => {
             setTimeout(resolve, 3000);
         }).then(() => this.getContatos())
+    }
+
+    search2(term: string): Observable<Contato[]> {
+        return this.http           //nome é o nome do atributo que temos no modelo Contato
+            .get(`${this.contatosUrl}/?nome=${term}`)
+            .map((res: Response) => res.json().data as Contato[]);//informar que esse json é um array de contatos
     }
 }
