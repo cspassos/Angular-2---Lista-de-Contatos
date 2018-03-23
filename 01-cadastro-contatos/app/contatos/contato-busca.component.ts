@@ -10,4 +10,8 @@ export {Component, OnInit} from '@angular/core';
 export class ContatoBuscaComponent implements OnInit{
 
     ngOnInit(){}
+
+    search(termo: string): void {
+        console.log(termo);
+    }
 }

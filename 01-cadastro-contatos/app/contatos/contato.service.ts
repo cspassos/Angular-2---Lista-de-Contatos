@@ -62,7 +62,7 @@ export class ContatoService {
         }).then(() => this.getContatos())
     }
 
-    search2(term: string): Observable<Contato[]> {
+    search(term: string): Observable<Contato[]> {
         return this.http           //nome é o nome do atributo que temos no modelo Contato
             .get(`${this.contatosUrl}/?nome=${term}`)
             .map((res: Response) => res.json().data as Contato[]);//informar que esse json é um array de contatos

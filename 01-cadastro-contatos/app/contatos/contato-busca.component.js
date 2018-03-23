@@ -10,6 +10,9 @@ var core_2 = require("@angular/core");
 exports.Component = core_2.Component;
 let ContatoBuscaComponent = class ContatoBuscaComponent {
     ngOnInit() { }
+    search(termo) {
+        console.log(termo);
+    }
 };
 ContatoBuscaComponent = __decorate([
     core_1.Component({
