@@ -33,7 +33,7 @@ export class ContatoDetalheComponent implements OnInit {
 
                 this.isNew = false; //significa que nao estou cadastrando um novo contato e sim alterando.
 
-                this.contatoService.getContato(id)
+                this.contatoService.find(id)
                     .then((contato: Contato) => {
                         this.contato = contato;
                     });

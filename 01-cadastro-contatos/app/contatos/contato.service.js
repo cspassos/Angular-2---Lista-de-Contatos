@@ -18,14 +18,14 @@ let ContatoService = class ContatoService {
         this.contatosUrl = 'api/contatos'; // contato = é o retorno do metodo da classe in-memory-data.service.ts 
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
-    getContatos() {
+    findAll() {
         return this.http.get(this.contatosUrl)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
-    getContato(id) {
-        return this.getContatos()
+    find(id) {
+        return this.findAll()
             .then((contatos) => contatos.find(contato => contato.id === id)); //percorre todo o array de contato
         //quando o id for igual ao do array ele me retorna
     }
@@ -53,11 +53,12 @@ let ContatoService = class ContatoService {
     getContatosSlowly() {
         return new Promise((resolve, reject) => {
             setTimeout(resolve, 3000);
-        }).then(() => this.getContatos());
+        }).then(() => this.findAll());
     }
-    search(term) {
+    //retorna um Observable de contatos
+    search(termo) {
         return this.http //nome é o nome do atributo que temos no modelo Contato
-            .get(`${this.contatosUrl}/?nome=${term}`)
+            .get(`${this.contatosUrl}/?nome=${termo}`)
             .map((res) => res.json().data); //informar que esse json é um array de contatos
     }
 };

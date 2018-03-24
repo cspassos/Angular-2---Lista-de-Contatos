@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
 
 import {Contato} from './contato.model';
 import {CONTATOS} from './contatos-mock';
+import {ServiceInterfaces} from './../interfaces/service.interfaces';
 
 @Injectable()
-export class ContatoService {
+export class ContatoService implements ServiceInterfaces<Contato> {
                                     //api =  projeto 
     private contatosUrl: string = 'api/contatos';// contato = é o retorno do metodo da classe in-memory-data.service.ts 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
@@ -17,7 +18,7 @@ export class ContatoService {
         private http: Http
     ){}
 
-    getContatos(): Promise<Contato[]>{
+    findAll(): Promise<Contato[]>{
         
         return this.http.get(this.contatosUrl)
             .toPromise()
@@ -25,8 +26,8 @@ export class ContatoService {
             .catch(this.handleError);
     }
 
-    getContato(id: number): Promise<Contato> {
-        return this.getContatos()
+    find(id: number): Promise<Contato> {
+        return this.findAll()
             .then((contatos: Contato[]) => contatos.find(contato => contato.id === id)); //percorre todo o array de contato
                 //quando o id for igual ao do array ele me retorna
     }
@@ -59,12 +60,13 @@ export class ContatoService {
     getContatosSlowly(): Promise<Contato[]> {
         return new Promise((resolve, reject) => {
             setTimeout(resolve, 3000);
-        }).then(() => this.getContatos())
+        }).then(() => this.findAll())
     }
 
-    search(term: string): Observable<Contato[]> {
-        return this.http           //nome é o nome do atributo que temos no modelo Contato
-            .get(`${this.contatosUrl}/?nome=${term}`)
+    //retorna um Observable de contatos
+    search(termo: string): Observable<Contato[]> {
+        return this.http            //nome é o nome do atributo que temos no modelo Contato
+            .get(`${this.contatosUrl}/?nome=${termo}`)
             .map((res: Response) => res.json().data as Contato[]);//informar que esse json é um array de contatos
     }
 }

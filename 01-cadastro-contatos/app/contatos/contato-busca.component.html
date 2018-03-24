@@ -8,14 +8,13 @@
                 <div class="form-group">
                         <label for="search"></label>
                         <input type="search" class="form-control" placeholder="Digite sua busca"
-                            #searchBox
-                            (keyup)="search(searchBox.value)"/>
+                        [ngModel]="busca" (ngModelChange)="search($event)" />
+                        <!--ngModelChange = Quando ouver alteração no ngModel ele vai chamar o search;
+                            event = O valor que esta sendo digitado no input-->
                 </div>
 
-                <ul class="list-group">
-                    <li class="list-group-item">Nome do Contato</li>
-                    <li class="list-group-item">Nome do amigo</li>
-                    <li class="list-group-item">Telefone do contato</li>
+                <ul class="list-group"> <!-- async -> se subscreve ao observable de contato e tras um array de contato-->
+                    <li class="list-group-item cursor-pointer" *ngFor="let c of contatos | async" (click)="verDetalhe(c)">{{ c.nome }}</li>
                 </ul>
             </div>
     </div>

@@ -30,7 +30,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             console.log(id);
             if (id) {
                 this.isNew = false; //significa que nao estou cadastrando um novo contato e sim alterando.
-                this.contatoService.getContato(id)
+                this.contatoService.find(id)
                     .then((contato) => {
                     this.contato = contato;
                 });
