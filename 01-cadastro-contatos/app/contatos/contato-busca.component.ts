@@ -9,7 +9,8 @@ import { ContatoService } from "./contato.service";
 
 @Component({
     moduleId: module.id,
-    selector: 'contato-busca',
+    //Criar e inserir uma instancia deste component onde ele encontrar a tag correspondente no HTML pai
+    selector: 'contato-busca',//esta sendo usado no app.component.html, assim ele consegue pegar o [(busca)]="termo"
     templateUrl: 'contato-busca.component.html',
     styles: [`
         .cursor-pointer:hover {

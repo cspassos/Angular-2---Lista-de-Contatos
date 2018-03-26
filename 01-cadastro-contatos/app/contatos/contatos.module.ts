@@ -23,6 +23,7 @@ import {ContatoBuscaComponent} from './contato-busca.component';
         ContatoBuscaComponent, // é preciso exportar para ele levar ele para o aap.component
         ContatosListaComponent
     ],
+    //Array de serviços que o component requer. Sempre vai criar uma nova instancia desse serviço.
     providers: [
         ContatoService //Vai instanciar o contatoService
     ]

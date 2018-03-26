@@ -4,9 +4,12 @@ import { Contato } from './contato.model';
 import {ContatoService} from './contato.service'
 import {DialogService} from '../dialog.service'
 
-@Component({
-    moduleId: module.id,
-    selector: 'contatos-lista',
+@Component({// informar que essa classe é um component
+    //Seta o caminho relativo como base para o HTMl que esta sendo declarado no metadado templateURL.
+    moduleId: module.id,//utilizado para montar o arquivo pelo id em alguma url. 
+    //Criar e inserir uma instancia deste component onde ele encontrar a tag correspondente no HTML pai
+    selector: 'contatos-lista',//ex: <contato-lista></contato-lista>
+    //caminho relativo para o arquivo HTML que representa o Template deste Component
     templateUrl: 'contatos-lista.component.html',
 })
 export class ContatosListaComponent implements OnInit {
